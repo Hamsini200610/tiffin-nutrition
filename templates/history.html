@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History | Nutrition Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .history-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .history-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            padding: 1.5rem;
+            text-align: left;
+            transition: 0.3s;
+        }
+
+        .history-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .history-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .history-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .history-items {
+            font-weight: 600;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .history-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h2
+                    style="background: linear-gradient(to right, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Nutrition Tracker</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('history') }}" style="color: var(--primary-color);">History</a>
+                <a href="{{ url_for('settings') }}">Settings</a>
+                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+
+        <header style="margin-bottom: 1rem;">
+            <h1>Analysis History</h1>
+            <p>Track your dietary progress over time</p>
+        </header>
+
+        {% if not history %}
+        <div class="main-card" style="margin-top: 3rem;">
+            <p>You haven't analyzed any meals yet. Start by taking a photo!</p>
+            <a href="{{ url_for('index') }}" class="btn"
+                style="display: inline-block; margin-top: 1rem; text-decoration: none;">New Analysis</a>
+        </div>
+        {% else %}
+        <div class="history-grid">
+            {% for entry in history %}
+            <div class="history-card">
+                <img src="{{ entry.image_url }}" class="history-img" alt="Meal">
+                <div class="history-date">{{ entry.timestamp.strftime('%B %d, %Y | %H:%M') }}</div>
+                <div class="history-items">{{ entry.items }}</div>
+                <div class="history-stats">
+                    <span>🔥 {{ entry.calories|round(0) }} kcal</span>
+                    <span>🥩 {{ entry.protein|round(1) }}g P</span>
+                    <span>🍞 {{ entry.carbs|round(1) }}g C</span>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>

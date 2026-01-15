@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Nutrition Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .camera-container {
+            display: none;
+            margin-bottom: 2rem;
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--shadow);
+        }
+
+        #webcam {
+            width: 100%;
+            height: auto;
+            transform: scaleX(-1);
+            display: block;
+        }
+
+        .camera-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .capture-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: white;
+            border: 8px solid rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: 0.2s;
+        }
+
+        .capture-btn:active {
+            transform: scale(0.9);
+        }
+
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .item-name {
+            color: var(--gold-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .item-macs {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h2>Nutrition Tracker</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}" class="active">Home</a>
+                <a href="{{ url_for('history') }}">History</a>
+                <a href="{{ url_for('settings') }}">Settings</a>
+                <span style="color: var(--text-muted); margin-left: 2rem;">Hi, {{ user.username }}</span>
+                <a href="{{ url_for('logout') }}" title="Logout"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+
+        <header>
+            <h1>Plate Analysis</h1>
+            <p>Ready to see what's in your meal today?</p>
+        </header>
+
+        <main class="main-card">
+            <div style="margin-bottom: 2.5rem; display: flex; justify-content: center; gap: 1.5rem;">
+                <button class="btn" onclick="toggleCamera()" id="camera-toggle-btn"
+                    style="background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--glass-border);">
+                    <i class="fas fa-camera"></i> Use Camera
+                </button>
+            </div>
+
+            <div class="camera-container" id="camera-box">
+                <video id="webcam" autoplay playsinline></video>
+                <div class="camera-controls">
+                    <button class="capture-btn" onclick="takeSnapshot()">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+            </div>
+
+            <form id="upload-form" enctype="multipart/form-data">
+                <div class="upload-area" id="drop-zone">
+                    <i class="fas fa-utensils"></i>
+                    <p>Select your meal photo</p>
+                    <span>Click to browse or Drag & Drop</span>
+                    <input type="file" id="file-input" name="file" accept="image/*" style="display:none;">
+                </div>
+
+                <button type="submit" class="btn" id="analyze-btn">
+                    <i class="fas fa-search-pie"></i> Start Deep Analysis
+                </button>
+            </form>
+
+            <div class="loader" id="loader"></div>
+
+            <div class="results-container" id="results-section">
+                <div class="image-preview">
+                    <img id="preview-img" src="" alt="Labeled Food">
+                </div>
+
+                <div class="nutrition-facts">
+                    <h2>Plate Insights</h2>
+                    <div id="items-table" style="margin-bottom: 2rem;">
+                        <!-- Individual items list -->
+                    </div>
+
+                    <div style="border-top: 1px solid var(--glass-border); padding-top: 2rem;">
+                        <h3 style="margin-bottom: 1.5rem;">Total Macros</h3>
+                        <div class="stat-grid">
+                            <div class="stat-item">
+                                <label>Calories</label>
+                                <value id="val-calories">0</value>
+                            </div>
+                            <div class="stat-item">
+                                <label>Protein</label>
+                                <value id="val-protein">0</value>g
+                            </div>
+                            <div class="stat-item">
+                                <label>Carbs</label>
+                                <value id="val-carbs">0</value>g
+                            </div>
+                            <div class="stat-item">
+                                <label>Fats</label>
+                                <value id="val-fats">0</value>g
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const dropZone = document.getElementById('drop-zone');
+        const fileInput = document.getElementById('file-input');
+        const uploadForm = document.getElementById('upload-form');
+        const resultsSection = document.getElementById('results-section');
+        const loader = document.getElementById('loader');
+        const previewImg = document.getElementById('preview-img');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const webcam = document.getElementById('webcam');
+        const cameraBox = document.getElementById('camera-box');
+        let stream = null;
+
+        async function toggleCamera() {
+            if (stream) {
+                stopCamera();
+                cameraBox.style.display = 'none';
+                dropZone.style.display = 'block';
+                document.getElementById('camera-toggle-btn').innerHTML = '<i class="fas fa-camera"></i> Use Camera';
+            } else {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+                    webcam.srcObject = stream;
+                    cameraBox.style.display = 'block';
+                    dropZone.style.display = 'none';
+                    document.getElementById('camera-toggle-btn').innerHTML = '<i class="fas fa-times"></i> Close Camera';
+                } catch (err) {
+                    alert("Camera blocked or not found.");
+                }
+            }
+        }
+
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(t => t.stop());
+                stream = null;
+            }
+        }
+
+        async function takeSnapshot() {
+            const canvas = document.createElement('canvas');
+            canvas.width = webcam.videoWidth;
+            canvas.height = webcam.videoHeight;
+            canvas.getContext('2d').drawImage(webcam, 0, 0);
+
+            canvas.toBlob(blob => {
+                const file = new File([blob], "snap.jpg", { type: "image/jpeg" });
+                const transfer = new DataTransfer();
+                transfer.items.add(file);
+                fileInput.files = transfer.files;
+
+                previewImg.src = URL.createObjectURL(blob);
+                stopCamera();
+                cameraBox.style.display = 'none';
+                dropZone.style.display = 'block';
+                document.getElementById('camera-toggle-btn').innerHTML = '<i class="fas fa-camera"></i> Use Camera';
+
+                uploadForm.dispatchEvent(new Event('submit'));
+            }, 'image/jpeg');
+        }
+
+        dropZone.onclick = () => fileInput.click();
+        fileInput.onchange = (e) => {
+            if (e.target.files.length > 0) {
+                previewImg.src = URL.createObjectURL(e.target.files[0]);
+                dropZone.querySelector('p').innerText = e.target.files[0].name;
+            }
+        };
+
+        uploadForm.onsubmit = async (e) => {
+            e.preventDefault();
+            const file = fileInput.files[0];
+            if (!file) { alert("Snap or upload a photo first!"); return; }
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            loader.style.display = 'block';
+            resultsSection.style.display = 'none';
+            analyzeBtn.disabled = true;
+
+            try {
+                const res = await fetch('/analyze', { method: 'POST', body: formData });
+                const data = await res.json();
+
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    previewImg.src = data.labeled_image_url;
+                    document.getElementById('val-calories').textContent = Math.round(data.total_nutrition.calories);
+                    document.getElementById('val-protein').textContent = data.total_nutrition.protein;
+                    document.getElementById('val-carbs').textContent = data.total_nutrition.carbohydrates;
+                    document.getElementById('val-fats').textContent = data.total_nutrition.fats;
+
+                    const table = document.getElementById('items-table');
+                    table.innerHTML = data.item_details.map(i => `
+                        <div class="item-row">
+                            <div>
+                                <div class="item-name">${i.name}</div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">${i.confidence} match</div>
+                            </div>
+                            <div class="item-macs">${Math.round(i.nutrition.calories)} kcal | ${i.nutrition.protein}g P</div>
+                        </div>
+                    `).join('');
+
+                    resultsSection.style.display = 'grid';
+                    window.scrollTo({ top: resultsSection.offsetTop, behavior: 'smooth' });
+                }
+            } catch (err) {
+                alert("Deep analysis failed. Server might be busy.");
+            } finally {
+                loader.style.display = 'none';
+                analyzeBtn.disabled = false;
+            }
+        };
+    </script>
+</body>
+
+</html>

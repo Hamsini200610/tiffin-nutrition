@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+env/
+
+# Databases
+instance/
+*.db
+
+# ML / Deep Learning
+models/
+cache/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# HuggingFace
+.huggingface/
+
+# YOLOX
+YOLOX/
+
+# Uploads (optional – see note below)
+# static/uploads/
+
+# OS
+.DS_Store
+Thumbs.db

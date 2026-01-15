@@ -1,0 +1,184 @@
+{
+  "idli": {
+    "calories": 65,
+    "protein": 2.0,
+    "carbohydrates": 12.0,
+    "fats": 0.2,
+    "unit": "per piece"
+  },
+  "dosa": {
+    "calories": 165,
+    "protein": 3.9,
+    "carbohydrates": 26.0,
+    "fats": 5.0,
+    "unit": "per medium dosa"
+  },
+  "medu vada": {
+    "calories": 90,
+    "protein": 2.5,
+    "carbohydrates": 8.0,
+    "fats": 5.0,
+    "unit": "per piece"
+  },
+  "sambar": {
+    "calories": 60,
+    "protein": 3.0,
+    "carbohydrates": 9.0,
+    "fats": 1.5,
+    "unit": "per bowl"
+  },
+  "coconut chutney": {
+    "calories": 45,
+    "protein": 1.0,
+    "carbohydrates": 2.0,
+    "fats": 4.0,
+    "unit": "per serving"
+  },
+  "pongal": {
+    "calories": 320,
+    "protein": 8.0,
+    "carbohydrates": 45.0,
+    "fats": 12.0,
+    "unit": "per plate"
+  },
+  "upma": {
+    "calories": 250,
+    "protein": 4.5,
+    "carbohydrates": 40.0,
+    "fats": 8.0,
+    "unit": "per bowl"
+  },
+  "kesari": {
+    "calories": 280,
+    "protein": 2.0,
+    "carbohydrates": 45.0,
+    "fats": 10.0,
+    "unit": "per serving"
+  },
+  "poori": {
+    "calories": 100,
+    "protein": 2.1,
+    "carbohydrates": 12.5,
+    "fats": 5.5,
+    "unit": "per piece"
+  },
+  "filter coffee": {
+    "calories": 45,
+    "protein": 1.5,
+    "carbohydrates": 6.0,
+    "fats": 2.0,
+    "unit": "per glass"
+  },
+  "uttapam": {
+    "calories": 210,
+    "protein": 4.8,
+    "carbohydrates": 32.0,
+    "fats": 6.0,
+    "unit": "per piece"
+  },
+  "appam": {
+    "calories": 120,
+    "protein": 2.0,
+    "carbohydrates": 22.0,
+    "fats": 3.0,
+    "unit": "per piece"
+  },
+  "paniyaram": {
+    "calories": 150,
+    "protein": 2.5,
+    "carbohydrates": 20.0,
+    "fats": 6.0,
+    "unit": "per 3 pieces"
+  },
+  "rava dosa": {
+    "calories": 190,
+    "protein": 4.5,
+    "carbohydrates": 28.0,
+    "fats": 7.0,
+    "unit": "per dosa"
+  },
+  "idiyappam": {
+    "calories": 45,
+    "protein": 1.0,
+    "carbohydrates": 10.0,
+    "fats": 0.2,
+    "unit": "per piece"
+  },
+  "khara bath": {
+    "calories": 280,
+    "protein": 5.0,
+    "carbohydrates": 35.0,
+    "fats": 12.0,
+    "unit": "per plate"
+  },
+  "set dosa": {
+    "calories": 250,
+    "protein": 6.0,
+    "carbohydrates": 45.0,
+    "fats": 5.0,
+    "unit": "per set"
+  },
+  "puttu": {
+    "calories": 220,
+    "protein": 4.0,
+    "carbohydrates": 35.0,
+    "fats": 6.0,
+    "unit": "per serving"
+  },
+  "green chutney": {
+    "calories": 35,
+    "protein": 0.8,
+    "carbohydrates": 3.0,
+    "fats": 2.5,
+    "unit": "per serving"
+  },
+  "red chutney": {
+    "calories": 50,
+    "protein": 1.2,
+    "carbohydrates": 6.0,
+    "fats": 2.5,
+    "unit": "per serving"
+  },
+  "chapati": {
+    "calories": 70,
+    "protein": 3.0,
+    "carbohydrates": 15.0,
+    "fats": 0.4,
+    "unit": "per piece"
+  },
+  "parotta": {
+    "calories": 240,
+    "protein": 5.0,
+    "carbohydrates": 38.0,
+    "fats": 8.0,
+    "unit": "per piece"
+  },
+  "bonda": {
+    "calories": 150,
+    "protein": 3.0,
+    "carbohydrates": 15.0,
+    "fats": 9.0,
+    "unit": "per piece"
+  },
+  "bajji": {
+    "calories": 180,
+    "protein": 3.5,
+    "carbohydrates": 18.0,
+    "fats": 10.0,
+    "unit": "per piece"
+  },
+  "poha": {
+    "calories": 180,
+    "protein": 2.5,
+    "carbohydrates": 35.0,
+    "fats": 3.0,
+    "unit": "per plate"
+  },
+  "masala dosa": {
+    "calories": 350,
+    "protein": 6.5,
+    "carbohydrates": 45.0,
+    "fats": 15.0,
+    "unit": "per dosa"
+  }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Nutrition Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1000px;
+            margin-bottom: 2rem;
+        }
+
+        .nav-links a {
+            margin-left: 1.5rem;
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .settings-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            padding: 3rem;
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .setting-info h4 {
+            color: white;
+            margin-bottom: 0.2rem;
+        }
+
+        .setting-info p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">
+                <h2
+                    style="background: linear-gradient(to right, var(--primary-color), var(--accent-color)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    Nutrition Tracker</h2>
+            </div>
+            <div class="nav-links">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="{{ url_for('history') }}">History</a>
+                <a href="{{ url_for('settings') }}" style="color: var(--primary-color);">Settings</a>
+                <a href="{{ url_for('logout') }}"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+
+        <header>
+            <h1>User Settings</h1>
+            <p>Customize your experience</p>
+        </header>
+
+        <div class="settings-card">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h4>Account Username</h4>
+                    <p>{{ user.username }}</p>
+                </div>
+                <button class="btn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Change</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h4>Calorie Goal</h4>
+                    <p>Current: 2000 kcal/day</p>
+                </div>
+                <button class="btn" style="padding: 0.5rem 1rem; font-size: 0.8rem;">Edit</button>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h4>Dark Mode</h4>
+                    <p>Always on for premium experience</p>
+                </div>
+                <i class="fas fa-toggle-on" style="color: var(--primary-color); font-size: 1.5rem;"></i>
+            </div>
+            <div class="setting-item">
+                <div class="setting-info">
+                    <h4>Data Storage</h4>
+                    <p>Local SQLite Database</p>
+                </div>
+                <span style="color: var(--accent-color); font-size: 0.8rem;">CONNECTED</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
