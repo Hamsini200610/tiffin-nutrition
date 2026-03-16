@@ -1,0 +1,18 @@
+Initializing OwlViT-B/32 on CPU...
+Found classes: ['Aloo Paratha', 'Dhokla', 'Dosa', 'Idli', 'Malai Kofta', 'Puran Poli', 'Samosa']
+
+Processing class: Aloo Paratha
+
+Processing class: Dhokla
+
+Processing class: Dosa
+
+Processing class: Idli
+
+Processing class: Malai Kofta
+
+Processing class: Puran Poli
+
+Processing class: Samosa
+
+Success! Labeled images saved to: c:\Users\HAMSINI\Desktop\tiffin nutrition  tracker\static\labeled_dataset

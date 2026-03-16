@@ -13,6 +13,13 @@
     "fats": 5.0,
     "unit": "per medium dosa"
   },
+  "plain dosa": {
+    "calories": 165,
+    "protein": 3.9,
+    "carbohydrates": 26.0,
+    "fats": 5.0,
+    "unit": "per medium dosa"
+  },
   "medu vada": {
     "calories": 90,
     "protein": 2.5,
@@ -132,7 +139,7 @@
     "fats": 2.5,
     "unit": "per serving"
   },
-  "red chutney": {
+  "tomato chutney": {
     "calories": 50,
     "protein": 1.2,
     "carbohydrates": 6.0,
@@ -180,5 +187,47 @@
     "carbohydrates": 45.0,
     "fats": 15.0,
     "unit": "per dosa"
+  },
+  "aloo paratha": {
+    "calories": 290,
+    "protein": 7,
+    "carbohydrates": 36,
+    "fats": 13,
+    "unit": "per paratha"
+  },
+  "dhokla": {
+    "calories": 160,
+    "protein": 8,
+    "carbohydrates": 20,
+    "fats": 5,
+    "unit": "per 2 pieces"
+  },
+  "malai kofta": {
+    "calories": 420,
+    "protein": 10,
+    "carbohydrates": 28,
+    "fats": 32,
+    "unit": "per serving"
+  },
+  "puran poli": {
+    "calories": 330,
+    "protein": 9,
+    "carbohydrates": 55,
+    "fats": 8,
+    "unit": "per piece"
+  },
+  "samosa": {
+    "calories": 260,
+    "protein": 6,
+    "carbohydrates": 32,
+    "fats": 12,
+    "unit": "per piece"
+  },
+  "potato masala": {
+    "calories": 120,
+    "protein": 2.2,
+    "carbohydrates": 18.0,
+    "fats": 4.5,
+    "unit": "per bowl"
   }
 }
